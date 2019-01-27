@@ -1,0 +1,65 @@
+{% load static %}
+{% load cache %}
+<!DOCTYPE html>
+<html lang="en">
+   {% include "components/header.html" %}
+<body>
+{% block content %}
+    <div class="container-fluid" style="margin-top: 30px">
+        <div class="row-fluid">
+          <div class="well" style="width: 620px; margin-left: auto; margin-right: auto;margin-top: 5%">
+            <div class="row-fluid">
+              <div>
+                {% block branding %}<h3 style="margin: 0 0 20px;">Reporting mvp</h3>{% endblock %}
+              </div>
+            </div><!-- /row fluid -->
+                {% if messages %}
+                    <ul>
+                        {% for message in messages %}
+                        <li>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <form method="post" >
+                     {% csrf_token %}
+                    {{form.as_p}}
+                     <button type="submit" class="btn btn-info">Submit</button>
+                 </form>
+          </div><!--/.well-->
+        </div><!-- /.row-fluid -->
+    </div><!-- /.container-fluid -->
+{% endblock %}
+{% block script %}
+      <script>
+        window.drf = {
+          csrfHeaderName: "{{ csrf_header_name|default:'X-CSRFToken' }}",
+          csrfCookieName: "{{ csrf_cookie_name|default:'csrftoken' }}"
+        };
+      </script>
+      <script src="{% static "staticfiles/js/jquery-3.3.1.min.js" %}"></script>
+      <script src="{% static "staticfiles/js/ajax-form.js" %}"></script>
+      <script src="{% static "staticfiles/js/csrf.js" %}"></script>
+      <script src="{% static "staticfiles/js/bootstrap.min.js" %}"></script>
+      <script src="{% static "staticfiles/js/prettify-min.js" %}"></script>
+      <script src="{% static "staticfiles/js/default.js" %}"></script>
+      <script>
+        $(document).ready(function() {
+          $('form').ajaxForm();
+        });
+      </script>
+{% endblock %}
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

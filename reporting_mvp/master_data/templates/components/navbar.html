@@ -1,0 +1,25 @@
+{% block navbar %}
+        <div class="navbar navbar-fixed-top navbar-default"
+             role="navigation">
+          <div class="container">
+            <span>
+              {% block branding %}
+                <a class='navbar-brand' rel="nofollow" href=''>
+                  Reporting
+                </a>
+              {% endblock %}
+            </span>
+            <ul class="nav navbar-nav pull-right">
+              {% block userlinks %}
+                {% if user.is_authenticated %}
+                  <a class='navbar-brand' href='/logout'>
+                    Logout
+                </a>
+                {% else %}
+
+                {% endif %}
+              {% endblock %}
+            </ul>
+          </div>
+        </div>
+      {% endblock %}

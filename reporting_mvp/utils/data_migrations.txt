@@ -1,0 +1,64 @@
+import os
+import json
+
+from django.db import migrations
+
+# this function will insert all services and it will also map services
+# data to our data model
+
+
+def populate_data(apps, schema_editor):
+    user_data = apps.get_model('auth.User')
+    user = user_data()
+    user.first_name = "Abdullah",
+    user.last_name = "Jabbar",
+    user.email = "abdullahjabbar001@gmail.com",
+    user.username = "abdullahjabbar001@gmail.com"
+    user.save()
+    for files in os.walk(
+        os.path.abspath(
+            os.path.dirname(__file__) +
+            "/../mapper")):
+        for file in files[2]:
+            with open(os.path.abspath(os.path.dirname(__file__) + "/../mapper/" + file)) as json_file:
+                data = json.load(json_file)
+                filename = os.path.basename(json_file.name).split(".")[0]
+                integrations = apps.get_model('master_data', 'Integrations')
+                service = integrations()
+                service.service_name = filename
+                service.created_by = user
+                service.updated_by = user
+                service.save()
+                for service_details in data:
+                    integration_tables = apps.get_model(
+                        'master_data', 'IntegrationsTableMapping')
+                    integration_columns = apps.get_model(
+                        'master_data', 'IntegrationsColumnMapping')
+                    for table_mapping in service_details['table']:
+                        table = integration_tables()
+                        table.integrations = service
+                        table.source_table = table_mapping['source_table']
+                        table.destination_table = table_mapping['destination_table']
+                        table.updated_by = user
+                        table.created_by = user
+                        table.save()
+                    for attribute, value in service_details.items():
+                        if attribute != 'table':
+                            columns = integration_columns()
+                            columns.integrations = table
+                            columns.source_column = value
+                            columns.created_by = user
+                            columns.updated_by = user
+                            columns.destination_column = attribute
+                            columns.save()
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('master_data', '0001_initial'),
+    ]
+
+    operations = [
+        migrations.RunPython(populate_data)
+    ]

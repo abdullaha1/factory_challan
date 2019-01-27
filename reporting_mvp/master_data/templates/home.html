@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+{% endblock %}
+{% block afterscript %}
+    <script>
+    $(document).ready(function(){
+
+    let dashboard = function(data){
+       debugger
+
+    };
+
+    ajaxCallPost('dashboard/',
+                'POST',
+                'JSON',
+                JSON.stringify({name:"abdullah",csrfmiddlewaretoken: getCookie('csrftoken')}),
+                dashboard
+            );
+    })
+    </script>
+{% endblock %}

@@ -1,0 +1,87 @@
+
+[{
+    "table": [
+        {
+            "source_table": "Users",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "email": "email",
+    "first_name": "name",
+    "middle_name": null,
+    "last_name": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Workspace",
+            "destination_table": "Workspace"
+        }
+    ],
+    "created_id": null,
+    "created_on": null,
+    "updated_on": null,
+    "status": null,
+    "description": null,
+    "name": "name",
+    "updated_by": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Projects",
+            "destination_table": "Projects"
+        }
+    ],
+    "id": "id",
+    "label": null,
+    "created_id": "account_id",
+    "created_on": "created_at",
+    "updated_on": null,
+    "status": null,
+    "description": "description",
+    "name": "name",
+    "updated_by": null
+}, {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Tasks"
+        }
+    ],
+    "id": "id",
+    "parent_id": null,
+    "assignee_oid": "[owner_ids]",
+    "reporter_id": "requested_by_id",
+    "name": "name",
+    "created_on": "created_at",
+    "updated_on": "updated_at",
+    "completed_on": null,
+    "project_id": "project_id",
+    "status": "current_state",
+    "priority": "priority",
+    "updated_by": null,
+    "label": "[labels]",
+    "description": "description",
+    "type": "story_type",
+    "media_count": null,
+    "estimate": "deadline",
+    "estimate_unit": "estimate"
+}, {
+    "table": [
+        {
+            "source_table": "Comments",
+            "destination_table": "Comments"
+        }
+    ],
+    "id": "id",
+    "text": "text",
+    "created_on": "created_at",
+    "created_by": "person_id",
+    "updated_by": null,
+    "updated_on": null,
+    "task_id": "story_id",
+    "project_id": null,
+    "media_count": null
+}]

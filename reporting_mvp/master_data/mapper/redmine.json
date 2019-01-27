@@ -1,0 +1,58 @@
+
+[{
+    "table": [
+        {
+            "source_table": "Users",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "email": "email",
+    "first_name": "name",
+    "middle_name": null,
+    "last_name": "lastname"
+},
+
+    {
+    "table": [
+        {
+            "source_table": "Projects",
+            "destination_table": "Projects"
+        }
+    ],
+    "id": "id",
+    "label": null,
+    "created_id": null,
+    "created_on": "created_on",
+    "updated_on": "updated_on",
+    "status": "status",
+    "description": "discription",
+    "name": "name",
+    "updated_by": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Tasks"
+        }
+    ],
+    "id": "id",
+    "parent_id": "parent.id",
+    "assignee_id": "assigned_to-id",
+    "reporter_id": "author-id",
+    "name": "task_name",
+    "created_on": "created_on",
+    "updated_on": "updated_on",
+    "completed_on": null,
+    "project_id": "project_id",
+    "status": "status-name",
+    "priority": "priority--name",
+    "updated_by": null,
+    "label": "[labels]",
+    "description": "description",
+    "type": "tracker.name",
+    "media_count": null,
+    "estimate": "estimated_hours",
+    "estimate_unit": null
+}]

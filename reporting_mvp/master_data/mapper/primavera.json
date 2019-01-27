@@ -1,0 +1,75 @@
+[{
+    "table": [
+        {
+            "source_table": "Users",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "email": "email_addr",
+    "first_name": "user_name",
+    "middle_name": null,
+    "last_name": "lastName"
+}, {
+    "table": [
+        {
+            "source_table": "Projects",
+            "destination_table": "Projects"
+        }
+    ],
+    "id": "id",
+    "label": null,
+    "created_id": "create_user",
+    "created_on": "create_date",
+    "updated_on": null,
+    "status": null,
+    "description": "title",
+    "name": "proj_short_name",
+    "updated_by": null
+}, {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Users"
+        },
+        {
+            "source_table": "tasksrcsrc",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "parent_id": null,
+    "assignee_oid": "rsrc_id",
+    "reporter_id": "create_user",
+    "name": "task_name",
+    "created_on": "create_date",
+    "updated_on": "update_date",
+    "completed_on": null,
+    "project_id": "proj_id",
+    "status": "status_code",
+    "priority": "priority_type",
+    "updated_by": "update_user",
+    "label": null,
+    "description": "notes",
+    "type": "task_type",
+    "media_count": "attachmentCount",
+    "estimate": "est_wt",
+    "estimate_unit": null
+},
+    {
+    "table": [
+        {
+            "source_table": "DOCREVIEWTASK",
+            "destination_table": "Comments"
+        }
+    ],
+    "id": "doc_review_id",
+    "text": "comment",
+    "created_on": "create_date",
+    "created_by": "create_user",
+    "updated_by": "update_user",
+    "updated_on": "update_date",
+    "task_id": "review_task_id",
+    "project_id": null,
+    "media_count": null
+}]

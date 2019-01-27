@@ -1,0 +1,90 @@
+[{
+    "table": [
+        {
+            "source_table": "User",
+            "destination_table": "User"
+        }
+    ],
+    "id": "id",
+    "email": "email",
+    "first_name": "name",
+    "middle_name": null,
+    "last_name": null
+},
+{
+    "table": [
+        {
+            "source_table": "Workspaces",
+            "destination_table": "Workspaces"
+        }
+    ],
+    "external_id":"id",
+    "source_created_by":null,
+    "source_created_at":null,
+    "source_updated_at":null,
+    "source_updated_by":null,
+    "status":null,
+    "description":null,
+    "name":"name"
+},
+    {
+    "table": [
+        {
+            "source_table": "Projects",
+            "destination_table": "Projects"
+        }
+    ],
+    "external_id":"id",
+    "workspace_id":"workspace.id",
+    "label": null,
+    "source_created_by": "owner.id",
+    "source_created_at": "created_at",
+    "source_updated_at": "modified_at",
+    "current_status": "layout",
+    "description": "notes",
+    "name": "name",
+    "source_updated_by": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Tasks"
+        }
+    ],
+    "external_id": "id",
+    "parent_id": "parent",
+    "assignee_id": "assignee.id",
+    "reporter_id": null,
+    "name": "name",
+    "source_created_at": "created_at",
+    "source_updated_at": "modified_at",
+    "completed_on": "completed_at",
+    "project_id": "[Project['id']]",
+    "status": null,
+    "priority": null,
+    "source_updated_by": null,
+    "labels": "tags",
+    "description": "notes",
+    "type": null,
+    "media_count": null,
+    "estimate": "due_on",
+    "estimate_unit": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Story",
+            "destination_table": "comments"
+        }
+    ],
+    "external_id": "id",
+    "text": "text",
+    "created_on": "created_at",
+    "source_created_by": "created_by.id",
+    "source_updated_by": null,
+    "source_updated_on": null,
+    "task_id": "task_id",
+    "project_id": null,
+    "media_count": null
+}]

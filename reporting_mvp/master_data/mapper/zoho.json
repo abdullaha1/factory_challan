@@ -1,0 +1,87 @@
+
+[{
+    "table": [
+        {
+            "source_table": "Users",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "email": "email",
+    "first_name": "name",
+    "middle_name": null,
+    "last_name": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Portal",
+            "destination_table": "Workspace"
+        }
+    ],
+    "created_id": null,
+    "created_on": null,
+    "updated_on": null,
+    "status": null,
+    "description": null,
+    "name": "name",
+    "updated_by": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Projects",
+            "destination_table": "Projects"
+        }
+    ],
+    "id": "id",
+    "label": null,
+    "created_id": "owner_id",
+    "created_on": "created_date",
+    "updated_on": null,
+    "status": "status",
+    "description": "description",
+    "name": "name",
+    "updated_by": null
+}, {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Tasks"
+        }
+    ],
+    "id": "id",
+    "parent_id": "parenttask_id",
+    "assignee_oid": "details.owners.id",
+    "reporter_id": "created_person",
+    "created_on": "created_time",
+    "updated_on": "last_updated_time",
+    "completed_on": null,
+    "status": "status",
+    "priority": "priority",
+    "project_id": null,
+    "label": null,
+    "name": "name",
+    "description": "description",
+    "type": null,
+    "estimate": " end_type - start_type",
+    "estimate_unit": "work_type",
+    "media_count": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Comments",
+            "destination_table": "Comments"
+        }
+    ],
+    "id": "id",
+    "text": "content",
+    "created_by": "added_by",
+    "updated_by": null,
+    "created_on": "created_time",
+    "updated_on": null,
+    "task": null,
+    "project": null,
+    "media_count": null
+}]

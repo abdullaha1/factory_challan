@@ -1,0 +1,54 @@
+[{
+    "table": [
+        {
+            "source_table": "Users",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "id",
+    "email": null,
+    "first_name": "login",
+    "middle_name": null,
+    "last_name": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Issues",
+            "destination_table": "Tasks"
+        }
+    ],
+    "id": "id",
+    "parent_id": null,
+    "assignee_oid": "[assignees.id]",
+    "reporter_id": "user.id",
+    "created_on": "created_at",
+    "updated_on": "updated_at",
+    "completed_on": "closed_at",
+    "status": "state",
+    "priority": null,
+    "project_id": null,
+    "label": "labels",
+    "name": "title",
+    "description": "body",
+    "type": null,
+    "estimate": null,
+    "estimate_unit": null,
+    "media_count": null
+}, {
+    "table": [
+        {
+            "source_table": "Comments",
+            "destination_table": "Comments"
+        }
+    ],
+    "id": "id",
+    "text": "body",
+    "created_by": "user",
+    "updated_by": null,
+    "created_on": "created_at",
+    "updated_on": "updated_at",
+    "task": null,
+    "project": null,
+    "media_count": null
+}]

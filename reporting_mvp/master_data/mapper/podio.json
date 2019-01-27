@@ -1,0 +1,88 @@
+[{
+    "table": [
+        {
+            "source_table": "User_Profile",
+            "destination_table": "Users"
+        }
+    ],
+    "id": "user_id",
+    "email": "mail",
+    "first_name": "name",
+    "middle_name": null,
+    "last_name": null
+},
+    {
+    "table": [
+        {
+            "source_table": "Spaces",
+            "destination_table": "Workspaces"
+        }
+    ],
+    "id":"space_id",
+    "created_id":"owner['user_id']",
+    "created_on":"created_on",
+    "updated_on":null,
+    "updated_by":null,
+    "status":"status",
+    "description":null,
+    "name":"config['name]"
+},
+    {
+    "table": [
+        {
+            "source_table": "Application",
+            "destination_table": "Projects"
+        }
+    ],
+    "id": "app_id",
+    "workspace_id":"space_id",
+    "label": "tags",
+    "created_id": "created_by.user_id",
+    "created_on": "created_on",
+    "updated_on": "current_revision.created_on",
+    "status": "fields.status",
+    "description": null,
+    "name": "title",
+    "updated_by": "current_revision.created_by"
+},
+    {
+    "table": [
+        {
+            "source_table": "Tasks",
+            "destination_table": "Tasks"
+        }
+    ],
+    "id": "task_",
+    "parent_id": null,
+    "assignee_oid": "responsible.user_id",
+    "reporter_id": "creator_by.user_id",
+    "created_on": "created_on",
+    "updated_on": null,
+    "completed_on": "completed_on",
+    "status": "status",
+    "priority": "priority",
+    "project_id": "ref.id",
+    "label": "labels",
+    "name": "text",
+    "description": "description",
+    "type": "presence.type",
+    "estimate": " due_on - created_on",
+    "estimate_unit": null,
+    "media_count": "len(files)"
+}, {
+    "table": [
+        {
+            "source_table": "Comments",
+            "destination_table": "Comments"
+        }
+    ],
+    "id": "comment_id",
+    "text": "value",
+    "created_by": "created_by",
+    "updated_by": "null",
+    "created_on": "created_on",
+    "updated_on": "last_edit_on",
+    "task": "ref.id",
+    "project": "ref.id",
+    "media_count": "len(files)"
+}]

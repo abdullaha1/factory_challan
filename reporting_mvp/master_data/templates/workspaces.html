@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+            <p class="hidden" id="_task_id">{{ task_id}}</p>
+{#            {% if workspaces %}#}
+{#                {% for workspace in workspaces %}#}
+{#                    <div class="row padding_bottom">#}
+{#                        <div class="col-sm-4 col-sm-offset-2">#}
+{#                            <label>{{workspace.name}}</label>#}
+{#                        </div>#}
+{#                        <div class="col-sm-4">#}
+{#                            <a class="btn btn-info" href="/projects/?workspace_id={{workspace.id}}&integration_id={{workspace.integration_id}}">Fetch Projects</a>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                {% endfor %}#}
+{##}
+{##}
+{#        {% endif %}#}
+    <div id="_workspace_data">
+
+    </div>
+{% endblock %}
+
+
+
+ {% block afterscript %}
+    <script>
+    $(document).ready(function(){
+        let response = function(data){
+            let html = '';
+            let cond = '';
+            _.forEach(data.results, function(object) {
+                cond = true;
+                for (let index = 0; index <= $('#_workspace_data').find('label').length; index++){
+                      let workspace_label = $('#_workspace_data').find('label').eq(index).attr('data-id');
+                        if (workspace_label==object.external_id){
+                            cond = false;
+                            return false
+                        }
+                }
+                if(cond){
+                    html += "<div class='row padding_bottom' data-id=_"+object.external_id+">"+
+                                    "<div class='col-sm-4 col-sm-offset-2'>"+
+                                    "<label data-id="+object.external_id+">"+object.name+"</label>"+
+                                "</div>"+
+                                "<div class='col-sm-4'>"+
+                                    "<a class='btn btn-info' href=/projects/?workspace_id="+object.id+"&&integration_id="+object.integration_id+">Fetch Projects</a>"+
+                                "</div>"+
+                              "</div>"
+                }
+
+            });
+        $('#_workspace_data').append(html)
+        };
+        ajaxCall('workspace',
+                'GET',
+                'JSON',
+                response
+        );
+
+
+        let status_response = function(data){
+            if (data.results[0].status=='processing')
+                    {
+                         setTimeout(function () {
+                            ajaxCall('workspace',
+                                    'GET',
+                                    'JSON',
+                                    response
+                             );
+                            checkStatus();
+                        },3000);
+                    }
+        }
+
+        function checkStatus() {
+            ajaxCall('job_status?task_id=' + $('#_task_id').html(),
+                'GET',
+                'JSON',
+                status_response
+            );
+        }
+    checkStatus();
+    })
+    </script>
+ {% endblock %}
