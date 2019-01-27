@@ -1,10 +1,8 @@
-from master_data.models.integrations import Integrations
 
 import dramatiq
 from django.shortcuts import render, redirect, render_to_response
 from django.views import View
 from django.http import *
-from master_data.tasks.api_interaction import get_projects
 from master_data.models.workspaces import Workspace
 
 class HomeView(View):

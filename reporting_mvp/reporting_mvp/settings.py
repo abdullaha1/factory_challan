@@ -39,21 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'master_data',
     'rest_framework',
-    'backend_api',
-    'social_django',
+    'backend_api'
 ]
 
-AUTHENTICATION_BACKENDS = (
-    'social_core.backends.open_id.OpenIdAuth',
-    'social_core.backends.google.GoogleOpenId',
-    'social_core.backends.google.GoogleOAuth2',
-    'social_core.backends.google.GoogleOAuth',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.yahoo.YahooOpenId',
-    'auth_backends.atlassian.AtlassianOAuth2',
-    'social_core.backends.asana.AsanaOAuth2',
-    'django.contrib.auth.backends.ModelBackend'
-)
+
 
 
 MIDDLEWARE = [
@@ -93,9 +82,9 @@ WSGI_APPLICATION = 'reporting_mvp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'king',
+        'NAME': 'factory_challan',
         'USER': 'postgres',
-        'PASSWORD': 'newpassword',
+        'PASSWORD': 'abdullah',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -145,34 +134,7 @@ STATIC_ROOT= 'master_data/static'
 LOGIN_REDIRECT_URL = '/home'
 LOGOUT_REDIRECT_URL = '/'
 
-DRAMATIQ_REDIS_URL = os.getenv("REDIS_URL", "redis://127.0.0.1:6379/0")
 
-DRAMATIQ_BROKER = {
-    "BROKER": "dramatiq.brokers.rabbitmq.RabbitmqBroker",
-    "OPTIONS": {
-        "url": "amqp://guest:guest@localhost:5672/%2F",
-    },
-    "MIDDLEWARE": [
-        "dramatiq.middleware.Prometheus",
-        "dramatiq.middleware.AgeLimit",
-        "dramatiq.middleware.TimeLimit",
-        "dramatiq.middleware.Callbacks",
-        "dramatiq.middleware.Retries",
-        "django_dramatiq.middleware.AdminMiddleware",
-        "django_dramatiq.middleware.DbConnectionsMiddleware",
-    ]
-}
-
-
-DRAMATIQ_RESULT_BACKEND = {
-    "BACKEND": "dramatiq.results.backends.redis.RedisBackend",
-    "BACKED_OPTIONS": {
-        "url": "redis://localhost:6379",
-    },
-    "MIDDLEWARE_OPTIONS": {
-        "result_ttl": 60000
-    }
-}
 
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
@@ -197,18 +159,3 @@ DRAMATIQ_TASKS_DATABASE = "default"
 
 STATIC_ROOT='master_data/static'
 
-SOCIAL_AUTH_PIPELINE = (
-    'master_data.pipeline_redirect.redirection_callback',
-)
-SOCIAL_AUTH_FIELDS_STORED_IN_SESSION = ['integration_id', 'task_id']
-
-
-SOCIAL_AUTH_REDIRECT_IS_HTTPS = True
-
-SOCIAL_AUTH_ASANA_KEY = '914981981715104'
-SOCIAL_AUTH_ASANA_SECRET = '46683db8b296b725a2bafc9cf0de6d27'
-SOCIAL_AUTH_ASANA_LOGIN_REDIRECT_URL = "https://local.yourdomain.com/home/"
-# SOCIAL_AUTH_ASANA_LOGIN_ERROR_URL = 'https://local.yourdomain.com/asana/dashboard'
-# SOCIAL_AUTH_ASANA_LOGIN_URL = 'https://local.yourdomain.com/asana/dashboard'
-SOCIAL_AUTH_ATLASSIAN_KEY = '5Do39l1N5KmK9GP0wAtxoLa3jp0Rt9vz'
-SOCIAL_AUTH_ATLASSIAN_SECRET = '5ttlx13SMlU4OKL6UzGVgQiHMj_g-vWf-dfToulbuXSSCCBMrA84_cgSdtX564UO'

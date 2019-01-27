@@ -7,6 +7,5 @@ class UserProfile(models.Model):
     """
     external_id = models.TextField()
     user = models.OneToOneField("auth.User", on_delete=models.PROTECT)
-    company = models.ForeignKey("Company", on_delete=models.PROTECT)
     token = models.TextField(null=True)
     middle_name = models.TextField(null=True)
