@@ -4,5 +4,5 @@
 },
 {
     "type": "Delivery",
-    "columns": ["Quantity-text","Details-text"]
+    "columns": ["Quantity-text","Details-textarea"]
 }]

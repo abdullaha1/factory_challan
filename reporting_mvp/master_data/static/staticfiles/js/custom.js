@@ -1,6 +1,6 @@
 function ajaxCall(url,method,dataType,success=null,error=null){
       $.ajax({
-                url: 'https://local.yourdomain.com/backend/'+url,
+                url: 'http://localhost:8000/backend/'+url,
                 method: method,
                 dataType:dataType,
                 success:success,
@@ -10,7 +10,7 @@ function ajaxCall(url,method,dataType,success=null,error=null){
 
 function ajaxCallPost(url,method,dataType,data,success=null,error=null){
       $.ajax({
-                url: 'https://local.yourdomain.com/backend/'+url,
+                url: 'http://localhost:8000/backend/'+url,
                 method: method,
                 dataType:dataType,
                 data:data,
