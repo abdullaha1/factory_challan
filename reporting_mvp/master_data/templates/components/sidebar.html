@@ -2,63 +2,80 @@
     <h3 class="brand"><a href="#"></a></h3>
     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
     <div class="menu-list">
-        <li data-toggle="modal" data-target="#_integration-modal"><a><i class="fas fa-angle-down rotate-icon"></i>Connectors<span class="arrow"></span></a></li>
-        <li data-toggle="modal" data-target="#_create-dashboard-modal"><a><i class="fas fa-angle-down rotate-icon"></i>Create Dashboard<span class="arrow"></span></a></li>
-        <li>
-            <a  href="#_workspace-sidebar-dropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Workspace<span class="arrow"></span></a>
-            <ul class="collapse list-unstyled" id="_workspace-sidebar-dropdown">
-            </ul>
-        </li>
-         <li>
-            <a  href="#_project-sidebar-dropdown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Projects<span class="arrow"></span></a>
-            <ul class="collapse list-unstyled" id="_project-sidebar-dropdown">
-            </ul>
-        </li>
+        <li data-toggle="modal" data-target="#_delivery-modal"><a><i class="fas fa-angle-down rotate-icon"></i>Delivery Challan<span class="arrow"></span></a></li>
+        <li data-toggle="modal" data-target="#_bill-modal"><a><i class="fas fa-angle-down rotate-icon"></i>Bill Challan<span class="arrow"></span></a></li>
     </div>
 </div>
-<div class="modal fade" id="_integration-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="_delivery-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lgs">
     <div class="modal-content">
          <div class="modal-header text-center">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title">Integrations</h2>
+            <h2 class="modal-title">Delivery Challan</h2>
         </div>
-        <div class="modal-body" id="_integration_modal_data">
+        <div class="modal-body">
+            <form class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Quantity</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="_delivery-quantity" placeholder="Enter Quantity">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Details</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" rows="5" id="_delivery-details" placeholder="Enter Details"></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                      <button type="button" id="_delivery-challan-submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
 
         </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="_create-dashboard-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="_bill-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lgs">
     <div class="modal-content">
          <div class="modal-header text-center">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h2 class="modal-title">Create Dashboard</h2>
+            <h2 class="modal-title">Bill Challan</h2>
         </div>
         <div class="modal-body">
             <form class="form-horizontal">
                 <div class="form-group">
-                <label class="control-label col-sm-3" for="email">Name:</label>
-                <div class="col-sm-6">
-                  <input type="text" class="form-control" id="_dashboard_name" placeholder="Enter dashboard name">
+                    <label class="control-label col-sm-3" for="email">Quantity</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="_bill-quantity" placeholder="Enter Quantity">
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-              <div class=" col-sm-3">
-                  <label class="control-label" for="email">Aggregators Only:</label>
-              </div>
-                <div class="col-sm-2">
-                  <div class="checkbox">
-                    <input id="_dashboard_aggregators" type="checkbox"/>
-                  </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Details</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" rows="5" placeholder="Enter Details" id="_bill-details"></textarea>
+                    </div>
                 </div>
-              </div>
-              <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-10">
-                  <button type="button" id="_basic_info_button" class="btn btn-primary">Next</button>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="email">Details</label>
+                    <div class="col-sm-6">
+                      <input type="text" class="form-control" id="_bill-amount" placeholder="Enter Amount">
+                    </div>
                 </div>
-              </div>
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-10">
+                      <button type="button" id="_bill-challan-submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
