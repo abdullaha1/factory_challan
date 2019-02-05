@@ -37,7 +37,15 @@
             $('#challan-table-head').append(tableHeaderHtml);
             _.forEach(data.results,function(object) {
                 for (let i = 0;i<tableHeader.length;i++){
-                   tableBodyHtml += "<td>"+object['data'][tableHeader[i]]+"</td>";
+                    let str = object['data'][tableHeader[i]];
+                    if(str.length > 20) {
+                        str = str.slice(0, 15);
+                        tableBodyHtml += "<td>" + str + "..</td>";
+                    }
+                    else{
+                        tableBodyHtml += "<td>" + str + "</td>";
+
+                    }
                 }
                 tableBodyHtml += "</tr>";
             });

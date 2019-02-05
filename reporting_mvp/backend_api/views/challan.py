@@ -37,6 +37,7 @@ class ChallanDataReadableViewSet(viewsets.ModelViewSet):
         dataArray = []
         for field in fields:
             dataArray.append("data__"+field['column'])
+        dataArray.append("id")
         return ChallanData.objects.filter(challan_type_id=challan_id).values(*dataArray)
 
     serializer_class = challan.ChallanDataReadableSerializer
