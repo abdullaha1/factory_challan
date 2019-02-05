@@ -29,22 +29,26 @@
             let tableHeaderHtml = "<tr>";
             let tableBodyHtml = "<tr>";
             for(let i = 0;i< tableHeader.length;i++){
-                let header = tableHeader[i].split('__');
-                tableHeaderHtml += "<th>"+header[1]+"</th>"
+                if(tableHeader[i]!='id') {
+                    let header = tableHeader[i].split('__');
+                    tableHeaderHtml += "<th>" + header[1] + "</th>"
+                }
             }
             tableHeaderHtml +="</tr>";
             $('#challan-table-head').empty();
             $('#challan-table-head').append(tableHeaderHtml);
             _.forEach(data.results,function(object) {
                 for (let i = 0;i<tableHeader.length;i++){
-                    let str = object['data'][tableHeader[i]];
-                    if(str.length > 20) {
-                        str = str.slice(0, 15);
-                        tableBodyHtml += "<td>" + str + "..</td>";
-                    }
-                    else{
-                        tableBodyHtml += "<td>" + str + "</td>";
+                    if(tableHeader[i]!='id') {
+                        let str = object['data'][tableHeader[i]];
+                        if (str.length > 20) {
+                            str = str.slice(0, 15);
+                            tableBodyHtml += "<td>" + str + "..</td>";
+                        }
+                        else {
+                            tableBodyHtml += "<td>" + str + "</td>";
 
+                        }
                     }
                 }
                 tableBodyHtml += "</tr>";
