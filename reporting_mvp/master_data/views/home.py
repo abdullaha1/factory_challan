@@ -19,3 +19,21 @@ class HomeView(View):
                 request, 'home.html')
         else:
             return HttpResponseRedirect("/")
+
+
+
+
+class DataView(View):
+
+    def get(self, request):
+        """
+        This is the Home Method.
+        Redirections from Home come here,
+        and home template is rendered with all integrations.
+        """
+        if request.user.is_authenticated:
+
+            return render(
+                request, 'data.html')
+        else:
+            return HttpResponseRedirect("/")

@@ -15,6 +15,7 @@
       {% block style %}
         {% block bootstrap_theme %}
          <link rel="stylesheet" type="text/css" href="{% static "c3/c3.css" %}"/>
+{#          <link rel="stylesheet" type="text/css" href="{% static "staticfiles/css/bootstrap.min.css" %}"/>#}
           <link rel="stylesheet" type="text/css" href="{% static "staticfiles/css/bootstrap.min.css" %}"/>
           <link rel="stylesheet" type="text/css" href="{% static "staticfiles/css/bootstrap-tweaks1.css" %}"/>
             <link rel="stylesheet" type="text/css" href="{% static "staticfiles/docs/css/base.css" %}"/>
@@ -24,6 +25,9 @@
         <link rel="stylesheet" type="text/css" href="{% static "staticfiles/css/default.css" %}"/>
         <link rel="stylesheet" type="text/css" href="{% static "staticfiles/css/sidebar.css" %}"/>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.9.0/bootstrap-table.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css">
+
         {% if code_style %}<style>{{ code_style }}</style>{% endif %}
       {% endblock %}
 

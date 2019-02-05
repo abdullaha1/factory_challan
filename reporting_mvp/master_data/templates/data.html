@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="">
+    <div class="text-center">
+        <div class="col-sm-12 col-sm-offset-1 " style="margin-top:5%">
+            <table id ="challan-data-table" class="table table-bordered">
+                <thead id="challan-table-head">
+
+                </thead>
+                <tbody id="challan-table-body">
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+{% endblock %}
+{% block afterscript %}
+    <script>
+
+    $(document).ready(function(){
+       let challan_id =  getUrlParameter('challan_id');
+
+    let get_data = function(data){
+
+        if(data.results.length > 0){
+            let tableHeader = _.keys(data.results[0]['data']);
+            let tableHeaderHtml = "<tr>";
+            let tableBodyHtml = "<tr>";
+            for(let i = 0;i< tableHeader.length;i++){
+                let header = tableHeader[i].split('__');
+                tableHeaderHtml += "<th>"+header[1]+"</th>"
+            }
+            tableHeaderHtml +="</tr>";
+            $('#challan-table-head').empty();
+            $('#challan-table-head').append(tableHeaderHtml);
+            _.forEach(data.results,function(object) {
+                for (let i = 0;i<tableHeader.length;i++){
+                   tableBodyHtml += "<td>"+object['data'][tableHeader[i]]+"</td>";
+                }
+                tableBodyHtml += "</tr>";
+            });
+            $('#challan-table-body').empty();
+            $('#challan-table-body').append(tableBodyHtml);
+            $('#challan-data-table').DataTable();
+        }
+    };
+        ajaxCall("challan-data-read/?challan_id="+challan_id,'GET','JSON',get_data);
+    });
+    </script>
+{% endblock %}

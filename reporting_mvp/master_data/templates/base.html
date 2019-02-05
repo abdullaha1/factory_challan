@@ -3,14 +3,14 @@
 <!DOCTYPE html>
 <html lang="en">
    {% include "components/header.html" %}
-<body>
+<body style="background-color:#F6EFED  ">
   {% include "components/navbar.html" %}
-  <div class="row" style="width:100%">
-      <div class="col-sm-2 top">
+  <div class="">
+{#      <div class="col-sm-2 top">#}
          {% include "components/sidebar.html" %}
-      </div>
-      <div class="col-sm-8">
-          <div class="container top" >
+{#      </div>#}
+      <div class="col-sm-8 col-sm-offset-2">
+          <div class=" top">
             <main>
               {% block content %}
               {% endblock %}
@@ -22,16 +22,18 @@
 
  {% block script %}
      <script src="{% static "staticfiles/js/jquery-3.3.1.min.js" %}"></script>
-     <script src="{% static "staticfiles/js/sidebar.js" %}"></script>
      <script src="{% static "staticfiles/js/ajax-form.js" %}"></script>
      <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-{#      <script src="{% static "staticfiles/js/csrf.js" %}"></script>#}
-      <script src="{% static "staticfiles/js/bootstrap.min.js" %}"></script>
-      <script src="{% static "staticfiles/js/prettify-min.js" %}"></script>
-      <script src="{% static "staticfiles/js/loadash.js" %}"></script>
-      <script src="{% static "staticfiles/js/custom.js" %}"></script>
-      <script src="{% static "staticfiles/js/charts.js" %}"></script>
-{#      <script src="{% static "staticfiles/js/default.js" %}"></script>#}
+
+     {#      <script src="{% static "staticfiles/js/csrf.js" %}"></script>#}
+     <script src="{% static "staticfiles/js/bootstrap.min.js" %}"></script>
+     <script src="{% static "staticfiles/js/prettify-min.js" %}"></script>
+     <script src="{% static "staticfiles/js/loadash.js" %}"></script>
+     <script src="{% static "staticfiles/js/custom.js" %}"></script>
+     <script src="{% static "staticfiles/js/charts.js" %}"></script>
+     <script src="{% static "staticfiles/js/sidebar.js" %}"></script>
+     {#      <script src="{% static "staticfiles/js/default.js" %}"></script>#}
+     <script src="https://cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
 
 
 <!-- Load d3.js and c3.js -->
