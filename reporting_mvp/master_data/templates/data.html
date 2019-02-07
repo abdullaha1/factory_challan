@@ -34,7 +34,7 @@
                     tableHeaderHtml += "<th>" + header[1] + "</th>"
                 }
             }
-            tableHeaderHtml +="</tr>";
+            tableHeaderHtml +="<th>Action</th></tr>";
             $('#challan-table-head').empty();
             $('#challan-table-head').append(tableHeaderHtml);
             _.forEach(data.results,function(object) {
@@ -51,6 +51,16 @@
                         }
                     }
                 }
+
+              tableBodyHtml+=  '<td><div class="dropdown">'+
+                    '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius:12px">Action  '+
+                        '<span class="caret"></span></button>'+
+                            '<ul class="dropdown-menu" style="min-width:100%">'+
+                                '<li><a href="#">Edit</a></li>'+
+                                '<li><a href="#">Delete</a></li>'+
+                                '<li><a href="#">View Details</a></li>'+
+                            '</ul>'+
+                      '</div></td>';
                 tableBodyHtml += "</tr>";
             });
             $('#challan-table-body').empty();
