@@ -1,3 +1,4 @@
+import json
 from master_data.models.challan_types import ChallanTypes
 from master_data.models.challan_columns import ChallanColumns
 from master_data.models.challan_data import ChallanData
@@ -27,9 +28,14 @@ class ChallanDataSerializer(serializers.ModelSerializer):
         validated_data['updated_by'] = self.context['request'].user
         return ChallanData.objects.create(**validated_data)
 
+    def partial_update(self, validated_data):
+        validated_data.updated_by = self.context['request'].user
+        data = validated_data
+        return ChallanData.objects.update(validated_data)
+
     class Meta:
         model = ChallanData
-        fields = ('id', 'data', 'challan_type_id','created_on')
+        fields = ('data', 'challan_type_id', 'deleted')
 
 
 class ChallanDataReadableSerializer(serializers.ModelSerializer):

@@ -1,6 +1,10 @@
+import json
+
 from rest_framework import viewsets
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from backend_api.serializers import challan
 from master_data.models.challan_types import ChallanTypes
@@ -25,8 +29,17 @@ class ChallanColumnViewSet(viewsets.ModelViewSet):
 
 class ChallanDataViewSet(viewsets.ModelViewSet):
 
-    queryset = ChallanData.objects.filter().all()
     serializer_class = challan.ChallanDataSerializer
+
+    @action(detail=True, url_name='edit', url_path='edit')
+    def edit(self, request, pk=None):
+        response = {}
+        data = ChallanData.objects.filter(deleted=False, id=request.GET['challan_id']).select_related('challan_type_id').values()
+        response['output'] = data[0]
+        response['map'] = ChallanColumns.objects.filter(challan_id = data[0]['challan_type_id_id']).values('column', 'type')
+        return Response(response)
+
+    queryset = ChallanData.objects.filter(deleted=False).all()
 
 
 class ChallanDataReadableViewSet(viewsets.ModelViewSet):
@@ -38,6 +51,6 @@ class ChallanDataReadableViewSet(viewsets.ModelViewSet):
         for field in fields:
             dataArray.append("data__"+field['column'])
         dataArray.append("id")
-        return ChallanData.objects.filter(challan_type_id=challan_id).values(*dataArray)
+        return ChallanData.objects.filter(challan_type_id=challan_id,deleted=False).values(*dataArray)
 
     serializer_class = challan.ChallanDataReadableSerializer

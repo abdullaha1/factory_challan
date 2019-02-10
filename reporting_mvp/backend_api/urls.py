@@ -11,7 +11,7 @@ router = routers.DefaultRouter()
 router.register(r'challan', challan.ChallanViewSet, base_name='challan')
 router.register(r'challan-columns', challan.ChallanColumnViewSet, base_name='challan-columns')
 router.register(r'challan-data', challan.ChallanDataViewSet, base_name='challan-data')
-router.register(r'challan-data-read', challan.ChallanDataReadableViewSet, base_name='challan-data-read')
+router.register(r'challan-data-read', challan.ChallanDataReadableViewSet, base_name='challan-data-readx')
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

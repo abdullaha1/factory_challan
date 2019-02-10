@@ -15,6 +15,54 @@
     </div>
     </div>
 
+
+
+<div class="modal fade" id="_action-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lgs">
+    <div class="modal-content">
+         <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h2 class="modal-title" id="_form-title"></h2>
+        </div>
+        <div class="modal-body">
+            <div class="row hidden" id="_success-message">
+                <div class="col-sm-12">
+                    <div class="alert alert-success">
+                            Challan successfuly updated.
+                    </div>
+                </div>
+            </div>
+            <form class="form-horizontal" id="_challan-action-body">
+
+            </form>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="_delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+         <div class="modal-header text-center">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title" id="_form-title">Are You sure, You want to delete this entry?</h4>
+        </div>
+        <div class="modal-body">
+            <div class="row hidden" id="_success-delete-message">
+                <div class="col-sm-12">
+                    <div class="alert alert-success">
+                            <strong>Success!</strong> Challan successfuly deleted.
+                    </div>
+                </div>
+            </div>
+            <p class="hidden" id="_challan_data_id"></p>
+            <button type ='button' class="btn btn-success btn-md" id="_yesDelete">Yes</button>
+            <button type ='button' class="btn btn-danger btn-md" id="_noDelete">No</button>
+        </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 {% block afterscript %}
     <script>
@@ -28,6 +76,7 @@
             let tableHeader = _.keys(data.results[0]['data']);
             let tableHeaderHtml = "<tr>";
             let tableBodyHtml = "<tr>";
+            let challan_id = '';
             for(let i = 0;i< tableHeader.length;i++){
                 if(tableHeader[i]!='id') {
                     let header = tableHeader[i].split('__');
@@ -50,15 +99,21 @@
 
                         }
                     }
+
+                    else{
+                        challan_id = object['data'][tableHeader[i]]
+                    }
+
                 }
+
 
               tableBodyHtml+=  '<td><div class="dropdown">'+
                     '<button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="border-radius:12px">Action  '+
                         '<span class="caret"></span></button>'+
-                            '<ul class="dropdown-menu" style="min-width:100%">'+
-                                '<li><a href="#">Edit</a></li>'+
-                                '<li><a href="#">Delete</a></li>'+
-                                '<li><a href="#">View Details</a></li>'+
+                            '<ul class="dropdown-menu" style="">'+
+                                '<li><a class="actionChallan" data-type="edit" data-id='+challan_id+' href="#">Edit</a></li>'+
+                                '<li><a class="actionChallan" data-type="delete" data-id='+challan_id+' href="#">Delete</a></li>'+
+                                '<li><a class="actionChallan" data-type="view" data-id='+challan_id+' href="#">View Details</a></li>'+
                             '</ul>'+
                       '</div></td>';
                 tableBodyHtml += "</tr>";
@@ -67,8 +122,77 @@
             $('#challan-table-body').append(tableBodyHtml);
             $('#challan-data-table').DataTable();
         }
+        else{
+            let dataTable = $('#challan-data-table').DataTable();
+            dataTable.destroy();
+            $('#challan-data-table').empty();
+        }
     };
         ajaxCall("challan-data-read/?challan_id="+challan_id,'GET','JSON',get_data);
+
+        $('#_noDelete').click(function (event) {
+            $('#_delete-modal').modal('hide');
+        });
+
+
+        $('#_yesDelete').click(function (event) {
+            let id = $('#_challan_data_id').html();
+
+            let del_data = function(response){
+                if(response){
+                    $('#_success-delete-message').removeClass('hidden');
+                    setTimeout(function(){
+                        $('#_success-delete-message').addClass('hidden');
+                        $('#_delete-modal').modal('hide');
+                    },3000);
+                        ajaxCall("challan-data-read/?challan_id="+challan_id,'GET','JSON',get_data);
+
+                }
+            };
+             ajaxCallPost('challan-data/'+id+"/",
+                        'PATCH',
+                        'JSON',
+                        JSON.stringify({deleted:true}),
+                        del_data
+                    )
+        });
+
+        $(document).on('click','.actionChallan',function(event){
+
+            let event_data = $(this);
+            let challan_id = event_data.parent().find('a').attr('data-id');
+            let challan_action_type = event_data.parent().find('a').attr('data-type');
+            let html = '';
+            if(challan_action_type==='edit'){
+                let get_challan_data_edit = function(response){
+                    let output = response['output']['data']
+                };
+                ajaxCall("challan-data/edit/edit/?challan_id="+challan_id,'GET','JSON',get_challan_data_edit)
+            }
+            else if(challan_action_type==='delete'){
+                $('#_challan_data_id').empty();
+                $('#_challan_data_id').append(challan_id);
+                $('#_delete-modal').modal('show');
+
+            }
+            else{
+                let get_challan_data = function(response){
+                    let challan_keys = _.keys(response['data']);
+                    for(let i = 0; i < challan_keys.length; i++){
+                        html +=     "<div class='form-group'>" +
+                                        "<label class='control-label col-sm-3'>"+challan_keys[i]+": </label>" +
+                                        "<div class=col-sm-8><label style='word-wrap: break-word;'>"+response['data'][challan_keys[i]]+"</label></div>"+
+                                    "</div>";
+                    }
+                    $('#_challan-action-body').empty();
+                    $('#_challan-action-body').append(html);
+                    $('#_action-modal').modal('show');
+                };
+                ajaxCall("challan-data/"+challan_id,'GET','JSON',get_challan_data)
+            }
+        });
+
+
     });
     </script>
 {% endblock %}
