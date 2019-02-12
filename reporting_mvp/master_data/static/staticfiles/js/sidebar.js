@@ -40,6 +40,14 @@
                                     "</div>"+
                                 "</div>";
                     }
+                    if(object.type==="number"){
+                      html +=   "<div class='form-group'>"+
+                                    "<label class='control-label col-sm-3' >"+object.column+"</label>"+
+                                    "<div class='col-sm-6'>"+
+                                        "<input type='number' name="+object.column+"  class='form-control form-class' required>"+
+                                    "</div>"+
+                                "</div>";
+                    }
                 });
                 html += "<div class='form-group'>"+
                             "<div class='col-sm-offset-3 col-sm-10'>"+

@@ -25,7 +25,7 @@
             <h2 class="modal-title" id="_form-title"></h2>
         </div>
         <div class="modal-body">
-            <div class="row hidden" id="_success-message">
+            <div class="row hidden" id="_success-edit-message">
                 <div class="col-sm-12">
                     <div class="alert alert-success">
                             Challan successfuly updated.
@@ -165,7 +165,46 @@
             let html = '';
             if(challan_action_type==='edit'){
                 let get_challan_data_edit = function(response){
-                    let output = response['output']['data']
+                    let map = response['map'];
+                    let output = response['output']['data'];
+                    let id = response['output']['id'];
+                    let html = "";
+                    _.forEach(output,function (object,index) {
+                        let fieldType = _.find(map,{column:index});
+
+                            if(fieldType.type==="text"){
+                                  html +=   "<div class='form-group'>"+
+                                                "<label class='control-label col-sm-3' >"+fieldType.column+"</label>"+
+                                                "<div class='col-sm-6'>"+
+                                                    "<input type='text' name="+fieldType.column+" value="+object+" class='form-control form-class' required>"+
+                                                "</div>"+
+                                            "</div>";
+                            }
+                            if(fieldType.type==="textarea"){
+                                  html +=   "<div class='form-group'>"+
+                                                "<label class='control-label col-sm-3' >"+fieldType.column+"</label>"+
+                                                "<div class='col-sm-6'>"+
+                                                    "<textarea class='form-control form-class'   name="+fieldType.column+" rows='5' required>"+object+"</textarea>"+
+                                                "</div>"+
+                                            "</div>";
+                            }
+                            if(fieldType.type==="number"){
+                                  html +=   "<div class='form-group'>"+
+                                                "<label class='control-label col-sm-3' >"+fieldType.column+"</label>"+
+                                                "<div class='col-sm-6'>"+
+                                                    "<input type='number' name="+fieldType.column+" value="+object+"  class='form-control form-class' required>"+
+                                                "</div>"+
+                                            "</div>";
+                            }
+                        });
+                    html += "<div class='form-group'>"+
+                            "<div class='col-sm-offset-3 col-sm-10'>"+
+                                "<button type='submit' data-id="+id+" data-challan="+getUrlParameter('challan_id')+" id='' class='btn btn-primary _submit-edit-form'>Submit</button>"+
+                            "</div>"+
+                        "</div>";
+                $('#_challan-action-body').empty();
+                $('#_challan-action-body').html(html);
+                $('#_action-modal').modal('show');
                 };
                 ajaxCall("challan-data/edit/edit/?challan_id="+challan_id,'GET','JSON',get_challan_data_edit)
             }
@@ -192,6 +231,36 @@
             }
         });
 
+         $("#_challan-action-body").submit(function(e) {
+
+            let form = $(this).serialize();
+            let form_json = {};
+            let form_data = form.split('&');
+            for(let i=0; i< form_data.length;i++){
+                let keyValue = form_data[i].split('=');
+                form_json[keyValue[0]] = keyValue[1].split('%20').join(' ');
+            }
+            let challan_id = $('._submit-edit-form').parent().find('button').attr('data-challan');
+            let id = $('._submit-edit-form').parent().find('button').attr('data-id');
+            let data_updated = function(data){
+                if(data) {
+                    $('#_success-edit-message').removeClass('hidden');
+                    setTimeout(function () {
+                        $('#_success-edit-message').addClass('hidden');
+                                        $('#_action-modal').modal('hide');
+
+                    }, 2000);
+                }
+                location.reload()
+            };
+            ajaxCallPost('challan-data/'+id+"/",
+                        'PATCH',
+                        'JSON',
+                        JSON.stringify({challan_type_id:challan_id,data:form_json}),
+                        data_updated
+                    );
+             e.preventDefault();
+    });
 
     });
     </script>
