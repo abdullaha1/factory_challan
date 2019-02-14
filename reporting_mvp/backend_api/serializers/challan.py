@@ -21,6 +21,15 @@ class ChallanColumnSerializer(serializers.ModelSerializer):
         fields = ('id', 'column', 'type', 'challan_id')
 
 
+class ChallanLatestSerializer(serializers.ModelSerializer):
+
+    challan_type_id = ChallanSerializer()
+
+    class Meta:
+        model = ChallanData
+        fields = ('id', 'data', 'created_on', 'challan_type_id')
+
+
 class ChallanDataSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):

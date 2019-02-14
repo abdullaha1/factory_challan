@@ -54,3 +54,9 @@ class ChallanDataReadableViewSet(viewsets.ModelViewSet):
         return ChallanData.objects.filter(challan_type_id=challan_id,deleted=False).values(*dataArray)
 
     serializer_class = challan.ChallanDataReadableSerializer
+
+
+class ChallanLatestViewSet(viewsets.ModelViewSet):
+
+        queryset = ChallanData.objects.filter(deleted=False).select_related('challan_type_id').order_by('-created_on')[:5]
+        serializer_class = challan.ChallanLatestSerializer
