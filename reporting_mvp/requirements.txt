@@ -9,6 +9,6 @@ asana==0.8.2
 psycopg2==2.7.5
 redis==2.10.6
 django-configurations==2.1
-djangorestframework==3.9.0
+djangorestframework==3.11.2
 django-filter==2.0.0
 Markdown==3.0.1
